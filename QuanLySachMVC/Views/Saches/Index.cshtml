@@ -1,0 +1,69 @@
+﻿@model IEnumerable<QuanLySachMVC.Models.Sach>
+
+@{
+    ViewData["Title"] = "Quản lý Sách";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-primary fw-bold">📚 Quản Lý Danh Mục Sách</h2>
+    <a asp-action="Create" class="btn btn-success">+ Thêm Sách Mới</a>
+</div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<form asp-action="Index" method="get" class="row g-2 mb-3">
+    <div class="col-md-5">
+        <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" class="form-control" placeholder="Tìm theo tiêu đề hoặc tác giả..." />
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-secondary">Tìm kiếm</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Làm mới</a>
+    </div>
+</form>
+
+<table class="table table-bordered table-striped table-hover align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>Mã</th>
+            <th>Tiêu Đề</th>
+            <th>Tác Giả</th>
+            <th>Thể Loại</th>
+            <th>Giá Bán</th>
+            <th>Ngày Xuất Bản</th>
+            <th class="text-center" style="width: 210px;">Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.MaSach</td>
+                    <td class="fw-semibold">@item.TieuDe</td>
+                    <td>@item.TacGia</td>
+                    <td><span class="badge bg-info text-dark">@item.TheLoai</span></td>
+                    <td>@item.GiaBan.ToString("N0") đ</td>
+                    <td>@item.NgayXuatBan.ToString("dd/MM/yyyy")</td>
+                    <td class="text-center">
+                        <a asp-action="Edit" asp-route-id="@item.MaSach" class="btn btn-sm btn-warning">Sửa</a>
+                        <a asp-action="Details" asp-route-id="@item.MaSach" class="btn btn-sm btn-info text-white">Chi tiết</a>
+                        <a asp-action="Delete" asp-route-id="@item.MaSach" class="btn btn-sm btn-danger">Xóa</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="7" class="text-center text-muted py-4">Không tìm thấy sách nào phù hợp.</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,33 @@
+﻿@model QuanLySachMVC.Models.Sach
+
+@{
+    ViewData["Title"] = "Xóa Sách";
+}
+
+<div class="card col-md-6 mx-auto border-danger shadow-sm">
+    <div class="card-header bg-danger text-white">
+        <h4 class="mb-0">Xác nhận xóa</h4>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-warning">
+            Bạn có chắc chắn muốn xóa cuốn sách này khỏi cơ sở dữ liệu?
+        </div>
+        <dl class="row">
+            <dt class="col-sm-4">Tiêu đề:</dt>
+            <dd class="col-sm-8 fw-bold">@Model.TieuDe</dd>
+
+            <dt class="col-sm-4">Tác giả:</dt>
+            <dd class="col-sm-8">@Model.TacGia</dd>
+
+            <dt class="col-sm-4">Giá tiền:</dt>
+            <dd class="col-sm-8">@Model.GiaBan.ToString("N0") đ</dd>
+        </dl>
+    </div>
+    <div class="card-footer d-flex justify-content-between">
+        <a asp-action="Index" class="btn btn-secondary">Hủy bỏ</a>
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="MaSach" />
+            <button type="submit" class="btn btn-danger">Xóa bản ghi</button>
+        </form>
+    </div>
+</div>

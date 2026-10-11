@@ -1,0 +1,39 @@
+﻿@model QuanLySachMVC.Models.Sach
+
+@{
+    ViewData["Title"] = "Chi tiết Sách";
+}
+
+<div class="card col-md-7 mx-auto shadow-sm">
+    <div class="card-header bg-info text-white">
+        <h4 class="mb-0">Chi Tiết Sách: @Model.TieuDe</h4>
+    </div>
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-4">Mã sách:</dt>
+            <dd class="col-sm-8">@Model.MaSach</dd>
+
+            <dt class="col-sm-4">Tiêu đề:</dt>
+            <dd class="col-sm-8 fw-bold">@Model.TieuDe</dd>
+
+            <dt class="col-sm-4">Tác giả:</dt>
+            <dd class="col-sm-8">@Model.TacGia</dd>
+
+            <dt class="col-sm-4">Thể loại:</dt>
+            <dd class="col-sm-8"><span class="badge bg-secondary">@Model.TheLoai</span></dd>
+
+            <dt class="col-sm-4">Giá bán:</dt>
+            <dd class="col-sm-8 text-danger fw-bold">@Model.GiaBan.ToString("N0") VNĐ</dd>
+
+            <dt class="col-sm-4">Ngày xuất bản:</dt>
+            <dd class="col-sm-8">@Model.NgayXuatBan.ToString("dd/MM/yyyy")</dd>
+
+            <dt class="col-sm-4">Mô tả:</dt>
+            <dd class="col-sm-8">@(string.IsNullOrEmpty(Model.MoTa) ? "Chưa có mô tả" : Model.MoTa)</dd>
+        </dl>
+    </div>
+    <div class="card-footer d-flex justify-content-between">
+        <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+        <a asp-action="Edit" asp-route-id="@Model.MaSach" class="btn btn-warning">Chỉnh sửa</a>
+    </div>
+</div>
